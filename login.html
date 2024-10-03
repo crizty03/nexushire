@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Hire - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url(https://images.unsplash.com/photo-1464618663641-bbdd760ae84a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .container h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .container p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .container input[type="email"], .container input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #000; /* Black border */
+            border-radius: 5px;
+            background-color: #000; /* Black background */
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Josefin Sans', sans-serif; /* Josefin Sans font */
+        }
+
+        .container button:hover {
+            background-color: #222; /* Darker shade on hover */
+            color: #fff; /* Text color on hover */
+        }
+
+        .container a {
+            color: #007BFF;
+            text-decoration: none;
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .container a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 1rem;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        /* Transparent header styles */
+        .nav-header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0); /* Transparent background */
+            padding: 1rem;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px 10px 0 0; /* Rounded corners only at the top */
+        }
+
+        .nav-header-bg .company-name {
+            font-family: 'Josefin Sans', sans-serif; /* Josefin Sans font */
+            font-size: 2.5rem; /* Increased font size */
+            font-weight: bold; /* Font weight increased */
+            color: #000; /* Text color changed to black */
+        }
+
+        .nav-header-bg nav {
+            display: flex;
+            gap: 1rem; /* Adds equal spacing between the buttons */
+        }
+
+        .nav-header-bg button {
+            padding: 8px 12px; /* Button styles from the first code */
+            border: 2px solid #000; /* Border color changed to black */
+            border-radius: 5px;
+            background-color: transparent;
+            color: #000; /* Text color changed to black */
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Josefin Sans', sans-serif; /* Josefin Sans font */
+        }
+
+        .nav-header-bg button:hover {
+            background-color: #000; /* Background color on hover */
+            color: #fff; /* Text color on hover */
+        }
+
+        .nav-header-bg .relative .group:hover .hidden {
+            display: block;
+        }
+
+        .nav-header-bg .hidden {
+            display: none;
+        }
+
+        .nav-header-bg .absolute {
+            position: absolute;
+        }
+
+        .nav-header-bg .group-hover\\:block {
+            display: block;
+        }
+
+        .nav-header-bg .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .nav-header-bg .rounded-md {
+            border-radius: 0.375rem;
+        }
+
+        .nav-header-bg .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <header class="nav-header-bg">
+        <div class="company-name">NEXUS Hire</div>
+        <nav>
+            <div class="relative group">
+                <button class="px-4 py-2" onclick="window.location.href='home.html'">Home</button>
+                <div class="absolute hidden group-hover:block bg-white text-black mt-2 rounded-md shadow-lg">
+                    <a href="#" class="block px-4 py-2">Submenu 1</a>
+                    <a href="#" class="block px-4 py-2">Submenu 2</a>
+                </div>
+            </div>
+            <div class="relative group">
+                <button class="px-4 py-2" onclick="window.location.href='Signup1.html'">Signup</button>
+                <div class="absolute hidden group-hover:block bg-white text-black mt-2 rounded-md shadow-lg">
+                    <a href="#" class="block px-4 py-2">Submenu 1</a>
+                    <a href="#" class="block px-4 py-2">Submenu 2</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>NEXUS Hire</h1>
+        <p>Login to your account</p>
+        <form action="login.php" method="post">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <a href="forgotpass.html">Forget Password?</a>
+        </form>
+    </div>
+    <footer>
+        <p>© 2024, NexusHire Corporation Pvt. Ltd. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

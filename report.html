@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Hire - Reports</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            background-color: #e6f3ff;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #b3d9ff;
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: #0066cc;
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav ul li {
+            padding: 10px 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .overview-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 18%;
+            text-align: center;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .card p {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0 0;
+        }
+
+        .card small {
+            display: block;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #999;
+        }
+
+        .chart-small {
+            height: 100px;
+            width: 100%;
+            margin: 10px auto;
+        }
+
+        .statistics {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .chart {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 48%;
+            text-align: center;
+        }
+
+        .chart h3 {
+            margin: 0 0 20px;
+            font-size: 20px;
+            color: #666;
+        }
+
+        .line-chart {
+            height: 250px;
+        }
+
+        .bar-chart {
+            height: 250px;
+        }
+
+        .pie-chart {
+            height: 250px;
+            width: 250px;
+            margin: 0 auto;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">NEXUS Hire</div>
+        <a href="profile.html">
+            <img class="profile-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHiGq5x0SqinC4KFPlAT-L5DEnn_5reux9sQ&s" alt="Profile Picture">
+        </a>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="alljobs.html">All Jobs</a></li>
+            <li><a href="overview.html">Overview</a></li>
+            <li><a href="report.html">Report</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="overview-cards">
+            <div class="card">
+                <h3>Total Candidates</h3>
+                <p>4,200</p>
+                <small>1,200 more than last year</small>
+                <canvas id="pieChart1" class="chart-small"></canvas>
+            </div>
+            <div class="card">
+                <h3>Candidates This Month</h3>
+                <p>678</p>
+                <small>Increase of 50 from last month</small>
+                <canvas id="lineChart1" class="chart-small"></canvas>
+            </div>
+            <div class="card">
+                <h3>Total Jobs</h3>
+                <p>35</p>
+                <small>5 new jobs posted this month</small>
+                <canvas id="pieChart2" class="chart-small"></canvas>
+            </div>
+            <div class="card">
+                <h3>Jobs Filled</h3>
+                <p>20</p>
+                <small>2 more positions filled this month</small>
+                <canvas id="barChart1" class="chart-small"></canvas>
+            </div>
+            <div class="card">
+                <h3>Active Recruitments</h3>
+                <p>15</p>
+                <small>Currently hiring for 5 departments</small>
+                <canvas id="pieChart3" class="chart-small"></canvas>
+            </div>
+        </div>
+        <div class="statistics">
+            <div class="chart">
+                <h3>Monthly Applications</h3>
+                <canvas id="lineChart" class="line-chart"></canvas>
+            </div>
+            <div class="chart">
+                <h3>Job Distribution</h3>
+                <canvas id="barChart" class="bar-chart"></canvas>
+            </div>
+            <div class="chart">
+                <h3>Applicants by Department</h3>
+                <canvas id="pieChart" class="pie-chart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Page entry animation
+        window.onload = function () {
+            const header = document.getElementById("header");
+            const body = document.body;
+            header.style.transform = "translateX(0)"; // Slide header into view
+            body.style.opacity = 1; // Fade in the body
+
+            // Initialize charts in cards
+            initializeCardCharts();
+        };
+
+        // Handle page transitions
+        function navigateTo(url) {
+            const header = document.getElementById("header");
+            const body = document.body;
+
+            header.style.transform = "translateX(100%)"; // Slide header out of view
+            body.style.opacity = 0; // Fade out the body
+
+            setTimeout(() => {
+                window.location.href = url;
+            }, 500); // Match the transition duration
+        }
+
+        // Line Chart for Monthly Applications
+        const ctxLine = document.getElementById('lineChart').getContext('2d');
+        const lineChart = new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Monthly Applications',
+                    data: [300, 450, 400, 500, 600, 700, 650, 500, 400, 550, 600, 750],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    fill: true,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Bar Chart for Job Distribution
+        const ctxBar = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'IT'],
+                datasets: [{
+                    label: 'Job Distribution',
+                    data: [12, 15, 10, 8, 7, 12],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart for Applicants by Department
+        const ctxPie = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'IT'],
+                datasets: [{
+                    label: 'Applicants by Department',
+                    data: [300, 200, 150, 100, 90, 110],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Initialize charts in cards
+        function initializeCardCharts() {
+            // Pie Chart for Total Candidates
+            const ctxPie1 = document.getElementById('pieChart1').getContext('2d');
+            const pieChart1 = new Chart(ctxPie1, {
+                type: 'pie',
+                data: {
+                    labels: ['New', 'Returning'],
+                    datasets: [{
+                        data: [70, 30],
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                        borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Line Chart for Candidates This Month
+            const ctxLine1 = document.getElementById('lineChart1').getContext('2d');
+            const lineChart1 = new Chart(ctxLine1, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Candidates',
+                        data: [150, 200, 180, 148],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Pie Chart for Total Jobs
+            const ctxPie2 = document.getElementById('pieChart2').getContext('2d');
+            const pieChart2 = new Chart(ctxPie2, {
+                type: 'pie',
+                data: {
+                    labels: ['Filled', 'Open'],
+                    datasets: [{
+                        data: [20, 15],
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+                        borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Bar Chart for Jobs Filled
+            const ctxBar1 = document.getElementById('barChart1').getContext('2d');
+            const barChart1 = new Chart(ctxBar1, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Jobs Filled',
+                        data: [2, 3, 4, 5, 6],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Pie Chart for Active Recruitments
+            const ctxPie3 = document.getElementById('pieChart3').getContext('2d');
+            const pieChart3 = new Chart(ctxPie3, {
+                type: 'pie',
+                data: {
+                    labels: ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance'],
+                    datasets: [{
+                        data: [5, 3, 2, 3, 2],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

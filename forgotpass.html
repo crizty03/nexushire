@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Hire - Forgot Password</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('/mnt/data/Screenshot 2024-05-21 132313.png') no-repeat center center fixed;
+            background-color: #add8e6; /* Light blue color */
+            background-size: cover;
+            overflow: hidden; /* Prevents scrolling */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 0, 0, 0); /* Transparent background */
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .company-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #000;
+            margin-left: 2rem; /* Adjusted margin to make sure it is visible */
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem; /* Adds equal spacing between the buttons */
+            margin-right: 2rem; /* Align to the right */
+        }
+
+        nav button {
+            padding: 8px 12px; /* Button styles */
+            border: 2px solid #000; /* Border color changed to black */
+            border-radius: 5px;
+            background-color: transparent;
+            color: #000; /* Text color changed to black */
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Josefin Sans', sans-serif; /* Josefin Sans font */
+        }
+
+        nav button:hover {
+            background-color: #000; /* Background color on hover */
+            color: #fff; /* Text color on hover */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px; /* Increased padding */
+            max-width: 600px; /* Adjusted max width */
+            width: 90%; /* Adjusted width */
+            margin: 20px;
+        }
+
+        .illustration {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .illustration img {
+            max-width: 80%; /* Adjusted max-width for better fit */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centered the form elements */
+        }
+
+        form label {
+            align-self: flex-start; /* Align label to the start */
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px; /* Increased margin for better spacing */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        form button {
+            width: 100%;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #444;
+        }
+
+        .terms {
+            font-size: 0.875rem;
+            color: #999;
+            margin-top: 10px;
+            text-align: center; /* Centered the terms text */
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0); /* Transparent background */
+            color: #333;
+            font-size: 0.875rem;
+            position: fixed; /* Position fixed to keep it at the bottom */
+            bottom: 0;
+            left: 0; /* Align to the left */
+            right: 0; /* Align to the right */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="company-name">NEXUS Hire</div>
+        <nav>
+            <button onclick="window.location.href='login.html'">Login</button>
+            <button onclick="window.location.href='signup.html'">Signup</button>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="illustration">
+            <img src="https://img.freepik.com/free-vector/forgot-password-concept-illustration_114360-1123.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1716249600&semt=ais_user" alt="Forgot Password Illustration">
+        </div>
+        <div class="content">
+            <h2>Forgot Your Password?</h2>
+            <p>Enter your email address associated with your account and we will send you the link to reset your password.</p>
+        </div>
+        <form action="resetpass.html" method="POST">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            <button onclick="window.location.href='resetpass.html'" type="submit">Send Link</button>
+        </form>
+        
+        <p class="terms">By continuing, you agree to our Terms of Service and Privacy Policy</p>
+    </div>
+    <footer>
+        © 2024, NexusHire Corporation Pvt. Ltd. All Rights Reserved.
+    </footer>
+</body>
+</html>

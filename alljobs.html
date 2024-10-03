@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Hire - Applicant Tracking System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #e6f3ff;
+            margin: 0;
+            padding: 0;
+            transition: opacity 0.5s ease-in-out; /* Add transition effect */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #b3d9ff;
+            transition: transform 0.5s ease-in-out; /* Add transition effect */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: bold;
+        }
+
+        header input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            margin-right: 5px; /* Add a small margin to the right of the input */
+        }
+
+        .filter-btn, .quick-add-btn {
+            padding: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Add hover transition */
+        }
+
+        .filter-btn:hover, .quick-add-btn:hover {
+            background-color: #004d99; /* Darken the button on hover */
+        }
+
+        .filter-btn {
+            margin-right: 10px; /* Adjust margin to fine-tune spacing */
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        nav {
+            background-color: #0066cc;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            font-family: "Josefin Sans", sans-serif; /* Apply font to navigation items */
+        }
+
+        nav ul li {
+            padding: 10px 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #0066cc;
+            text-align: center;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #b3d9ff;
+        }
+
+        td img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal input[type="text"], .modal input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+
+        .modal button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Add hover transition */
+        }
+
+        .modal button:hover {
+            background-color: #004d99; /* Darken the button on hover */
+        }
+
+        /* Search and Pagination Styles */
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-container input[type=text] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .pagination button {
+            padding: 10px 15px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: background-color 0.3s; /* Add hover transition */
+        }
+
+        .pagination button:hover {
+            background-color: #004d99; /* Darken the button on hover */
+        }
+
+        /* Table Container */
+        .table-container {
+            display: none;
+        }
+
+        /* Star Rating Styles */
+        .checked {
+            color: orange;
+        }
+    </style>
+</head>
+<body id="page1">
+    <header id="header">
+        <div class="logo">NEXUS Hire</div>
+        <input type="text" id="searchInput" placeholder="Search by job ID...">
+        <button class="filter-btn" onclick="searchTable()">Search</button>
+        <button class="quick-add-btn" id="quickAddBtn">+ QUICK ADD</button>
+        <a href="profile.html">
+            <img class="profile-pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHiGq5x0SqinC4KFPlAT-L5DEnn_5reux9sQ&s" alt="Profile Picture">
+        </a>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">All Jobs</a></li>
+            <li><a href="#" onclick="transitionToOverview()">Overview</a></li>
+            <li><a href="http://localhost/report.html">Report</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <h1>Nexus Hire - Applicant Tracking System</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>JOB ID</th>
+                    <th>JOB TITLE</th>
+                    <th>CUSTOMER</th>
+                    <th class="submissions">SUBMISSIONS</th>
+                    <th class="status">STATUS</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody id="jobTableBody">
+                <!-- Table content will be generated dynamically -->
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button onclick="prevPage()">Previous</button>
+            <button onclick="nextPage()">Next</button>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Add New Applicant</h2>
+            <label for="job id">JOB ID</label>
+            <input type="text" id="jobId" name="jobId" required>
+            <label for="job title">JOB TITLE</label>
+            <input type="text" id="jobTitle" name="jobTitle" required>
+            <label for="customer">CUSTOMER</label>
+            <input type="text" id="customer" name="customer" required>
+            <label for="submissions">SUBMISSIONS</label>
+            <input type="text" id="submissions" name="submissions" required>
+            <label for="status">STATUS</label>
+            <input type="text" id="status" name="status" required>
+            <button id="submitApplicant">Submit</button>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeEditModal">&times;</span>
+            <h2>Edit Applicant</h2>
+            <label for="editJobId">JOB ID</label>
+            <input type="text" id="editJobId" name="editJobId" required>
+            <label for="editJobTitle">JOB TITLE</label>
+            <input type="text" id="editJobTitle" name="editJobTitle" required>
+            <label for="editCustomer">CUSTOMER</label>
+            <input type="text" id="editCustomer" name="editCustomer" required>
+            <label for="editSubmissions">SUBMISSIONS</label>
+            <input type="text" id="editSubmissions" name="editSubmissions" required>
+            <label for="editStatus">STATUS</label>
+            <input type="text" id="editStatus" name="editStatus" required>
+            <button id="submitEditApplicant">Save Changes</button>
+        </div>
+    </div>
+
+    <script>
+        // Define rows per page and current page variables
+        const rowsPerPage = 5;
+        let currentPage = 1;
+
+        // Check if applicant data exists in local storage
+        let data = JSON.parse(localStorage.getItem("applicantData")) || [];
+
+        // Function to display table with paginated data
+        function displayTable(data) {
+            const tableBody = document.getElementById("jobTableBody");
+            tableBody.innerHTML = "";
+
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedData = data.slice(start, end);
+
+            paginatedData.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.jobId}</td>
+                    <td>${item.jobTitle}</td>
+                    <td>${item.customer}</td>
+                    <td class="submissions">${item.submissions}</td>
+                    <td class="status">${item.status}</td>
+                    <td>
+                        <button onclick="editApplicant('${item.jobId}')">Edit</button>
+                        <button onclick="deleteApplicant('${item.jobId}')">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to navigate to previous page
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayTable(data);
+            }
+        }
+
+        // Function to navigate to next page
+        function nextPage() {
+            if (currentPage * rowsPerPage < data.length) {
+                currentPage++;
+                displayTable(data);
+            }
+        }
+
+        // Function to search table by job ID
+        function searchTable() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const filteredData = data.filter(item => item.jobId.toLowerCase().includes(searchInput));
+            currentPage = 1;
+            displayTable(filteredData);
+        }
+
+        // Modal functionality
+        const modal = document.getElementById("myModal");
+        const btn = document.getElementById("quickAddBtn");
+        const span = document.getElementById("closeModal");
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Edit Modal functionality remains the same
+
+        // Function to edit applicant details
+        function editApplicant(jobId) {
+            const applicant = data.find(item => item.jobId === jobId);
+            document.getElementById("editJobId").value = applicant.jobId;
+            document.getElementById("editJobTitle").value = applicant.jobTitle;
+            document.getElementById("editCustomer").value = applicant.customer;
+            document.getElementById("editSubmissions").value = applicant.submissions;
+            document.getElementById("editStatus").value = applicant.status;
+            editModal.style.display = "block";
+        }
+
+        // Function to save edited applicant details
+        document.getElementById("submitEditApplicant").onclick = function() {
+            const jobId = document.getElementById("editJobId").value;
+            const jobTitle = document.getElementById("editJobTitle").value;
+            const customer = document.getElementById("editCustomer").value;
+            const submissions = document.getElementById("editSubmissions").value;
+            const status = document.getElementById("editStatus").value;
+
+            const index = data.findIndex(item => item.jobId === jobId);
+            if (index !== -1) {
+                data[index] = { jobId, jobTitle, customer, submissions, status };
+                localStorage.setItem("applicantData", JSON.stringify(data)); // Save updated data to local storage
+                displayTable(data);
+                editModal.style.display = "none";
+            }
+        };
+
+        // Function to submit new applicant details
+        document.getElementById("submitApplicant").onclick = function() {
+            const jobId = document.getElementById("jobId").value;
+            const jobTitle = document.getElementById("jobTitle").value;
+            const customer = document.getElementById("customer").value;
+            const submissions = document.getElementById("submissions").value;
+            const status = document.getElementById("status").value;
+
+            // Add new applicant to data array
+            data.push({ jobId, jobTitle, customer, submissions, status });
+
+            // Save data to local storage
+            localStorage.setItem("applicantData", JSON.stringify(data));
+
+            // Display updated table
+            displayTable(data);
+
+            // Close modal
+            modal.style.display = "none";
+        };
+
+        // Function to delete an applicant
+        function deleteApplicant(jobId) {
+            // Filter out the applicant with the provided job ID
+            data = data.filter(item => item.jobId !== jobId);
+
+            // Update data in local storage
+            localStorage.setItem("applicantData", JSON.stringify(data));
+
+            // Display updated table
+            displayTable(data);
+        }
+
+        // Function for page transition effect
+        function transitionToOverview() {
+            const body = document.getElementById("page1");
+            const header = document.getElementById("header");
+            header.style.transform = "translateX(-100%)"; // Move header to the left
+            body.style.opacity = 0;
+            setTimeout(() => {
+                window.location.href = "overview.html";
+            }, 500);
+        }
+
+        // Initial display of table
+        displayTable(data);
+    </script>
+</body>
+</html>
